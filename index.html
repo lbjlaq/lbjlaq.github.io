@@ -1,0 +1,105 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=2.0" />
+<title>Ctrler</title>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+
+</style>
+</head>
+<body>
+
+<div class="autotype" id="autotype">
+ <br>
+ <br>
+ <br>
+ <p><center>很高兴你们能够关注到这个无名小站</center></p>
+ <p><center>由于种种原因，可能会暂时关闭一下网站</center></p>
+ <p><center>希望大家可以谅解</center></p>
+ <p><center>如果有兴趣的可以关注公众号Ctrler，不定时更新推文</center></p>
+ <p><center>或者可以进我的群，至于怎样进，留个悬念</center></p>
+ <p><center>我们将会回来的</center></p>
+ <br>
+ <p><center>By Ctrler~</center></p>
+</div>
+
+
+<script>
+$.fn.autotype = function() {
+    var $text = $(this);
+    console.log('this', this);
+    var str = $text.html(); //返回被选 元素的内容
+    var index = 0;
+    var x = $text.html('');
+    //$text.html()和$(this).html('')有区别
+    var timer = setInterval(function() {
+        //substr(index, 1) 方法在字符串中抽取从index下标开始的一个的字符
+        var current = str.substr(index, 1);
+        if (current == '<') {
+            //indexOf() 方法返回">"在字符串中首次出现的位置。
+            index = str.indexOf('>', index) + 1;
+        } else {
+            index++;
+        }
+        //console.log(["0到index下标下的字符",str.substring(0, index)],["符号",index & 1 ? '_': '']);
+        //substring() 方法用于提取字符串中介于两个指定下标之间的字符
+        $text.html(str.substring(0, index) + (index & 1 ? '_': ''));
+        if (index >= str.length) {
+            clearInterval(timer);
+        }
+    },
+    100);
+};
+$("#autotype").autotype();
+</script>
+
+<script type="text/javascript">
+(function($){
+	$.fn.snow = function(options){
+	var $flake = $('<div id="snowbox" />').css({'position': 'absolute','z-index':'9999', 'top': '-50px'}).html('&#10052;'),
+	documentHeight 	= $(document).height(),
+	documentWidth	= $(document).width(),
+	defaults = {
+		minSize		: 10,
+		maxSize		: 20,
+		newOn		: 1000,
+		flakeColor	: "#AFDAEF" /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
+	},
+	options	= $.extend({}, defaults, options);
+	var interval= setInterval( function(){
+	var startPositionLeft = Math.random() * documentWidth - 100,
+	startOpacity = 0.5 + Math.random(),
+	sizeFlake = options.minSize + Math.random() * options.maxSize,
+	endPositionTop = documentHeight - 200,
+	endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
+	durationFall = documentHeight * 10 + Math.random() * 5000;
+	$flake.clone().appendTo('body').css({
+		left: startPositionLeft,
+		opacity: startOpacity,
+		'font-size': sizeFlake,
+		color: options.flakeColor
+	}).animate({
+		top: endPositionTop,
+		left: endPositionLeft,
+		opacity: 0.2
+	},durationFall,'linear',function(){
+		$(this).remove()
+	});
+	}, options.newOn);
+    };
+})(jQuery);
+$(function(){
+    $.fn.snow({ 
+	    minSize: 5, /* 定义雪花最小尺寸 */
+	    maxSize: 50,/* 定义雪花最大尺寸 */
+	    newOn: 300  /* 定义密集程度，数字越小越密集 */
+    });
+});
+</script>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" src="http://music.163.com/outchain/player?type=2&id=29107065&auto=1&height=66" style="width:20%;height:86px;position:absolute;bottom:0px;left:40%"></iframe>
+</body>
+
+</html>
